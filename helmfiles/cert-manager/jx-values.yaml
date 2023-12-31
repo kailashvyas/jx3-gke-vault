@@ -20,16 +20,24 @@ jxRequirements:
     enabled: false
     schedule: ""
   cluster:
+    chartRepository: http://jenkins-x-chartmuseum.jx.svc.cluster.local:8080
+    clusterName: tf-jx-lucky-mackerel
     devEnvApprovers:
     - todo
     environmentGitOwner: todo
     gitKind: github
     gitName: github
     gitServer: https://github.com
+    gke:
+      projectNumber: "242332489416"
+    project: southern-matter-409716
     provider: gke
     registry: gcr.io
+    zone: us-central1-a
   environments:
   - key: dev
+    owner: kailashvyas
+    repository: jx3-gke-vault
   - key: staging
   - key: production
   ingress:
@@ -39,10 +47,25 @@ jxRequirements:
     tls:
       email: ""
       enabled: false
-      production: false
+      production: true
+  pipelineUser:
+    username: kailashvyas
   repository: nexus
   secretStorage: vault
-  vault: {}
+  storage:
+  - name: logs
+    url: gs://logs-tf-jx-lucky-mackerel-d8ae00266683
+  - name: reports
+    url: gs://reports-tf-jx-lucky-mackerel-d8ae00266683
+  - name: repository
+    url: gs://repository-tf-jx-lucky-mackerel-d8ae00266683
+  terraformVault: true
+  vault:
+    bucket: vault-tf-jx-lucky-mackerel-d8ae00266683
+    key: crypto-key-tf-jx-lucky-mackerel-d8ae00266683
+    keyring: keyring-tf-jx-lucky-mackerel-d8ae00266683
+    name: tf-jx-lucky-mackerel
+    serviceAccount: tf-jx-lucky-mackerel-vt
   webhook: lighthouse
 jxRequirementsIngressExternalDNS:
   enabled: false
